@@ -16,8 +16,10 @@ fi
 
 python netbox/manage.py shell --plain << END
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 if not User.objects.filter(username='${SUPERUSER_NAME}'):
-    User.objects.create_superuser('${SUPERUSER_NAME}', '${SUPERUSER_EMAIL}', '${SUPERUSER_PASSWORD}')
+    user = User.objects.create_superuser('${SUPERUSER_NAME}', '${SUPERUSER_EMAIL}', '${SUPERUSER_PASSWORD}')
+    Token.objects.create(user=user)
 END
 
 # copy static files
