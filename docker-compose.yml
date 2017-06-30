@@ -15,7 +15,7 @@ services:
         depends_on:
         - netbox
         ports:
-        - 80
+        - 80:80
         volumes:
         - netbox-static-files:/opt/netbox/netbox/static
         - netbox-nginx-config:/etc/netbox-nginx/
