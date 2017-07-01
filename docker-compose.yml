@@ -25,6 +25,8 @@ services:
             POSTGRES_USER: netbox
             POSTGRES_PASSWORD: J5brHrAXFLQSif0K
             POSTGRES_DB: netbox
+        ports:
+        - 5432:5432
 volumes:
     netbox-static-files:
         driver: local
