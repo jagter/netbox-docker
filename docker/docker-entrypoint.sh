@@ -20,11 +20,11 @@ if not User.objects.filter(username='${SUPERUSER_NAME}'):
     User.objects.create_superuser('${SUPERUSER_NAME}', '${SUPERUSER_EMAIL}', '${SUPERUSER_PASSWORD}')
 END
 
-# add token for unittests
-psql -H postgres -U netbox -d netbox -c "INSERT INTO users_token VALUES (1, '2017-07-01 08:23:03.33113+00', DEFAULT, '91b6c637c1c2260412c5b3402da0e21e77461d7b', True, ' ', 1)"
-
 # copy static files
 /opt/netbox/netbox/manage.py collectstatic --no-input
+
+# add token for unittests
+PGPASSWORD=${DB_PASSWORD} psql -h postgres -U netbox -d netbox -c "INSERT INTO users_token VALUES (1, '2017-07-01 08:23:03.33113+00', DEFAULT, '${SUPERUSER_TOKEN}', True, ' ', 1)"
 
 # start unicorn
 gunicorn --log-level debug --debug --error-logfile /dev/stderr --log-file /dev/stdout -c /opt/netbox/gunicorn_config.py netbox.wsgi
