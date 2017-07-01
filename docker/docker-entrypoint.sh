@@ -21,7 +21,7 @@ if not User.objects.filter(username='${SUPERUSER_NAME}'):
 END
 
 # add token for unittests
-psql -U netbox -d netbox -c "INSERT INTO users_token VALUES (1, '2017-07-01 08:23:03.33113+00', DEFAULT, '91b6c637c1c2260412c5b3402da0e21e77461d7b', True, ' ', 1)"
+psql -H postgres -U netbox -d netbox -c "INSERT INTO users_token VALUES (1, '2017-07-01 08:23:03.33113+00', DEFAULT, '91b6c637c1c2260412c5b3402da0e21e77461d7b', True, ' ', 1)"
 
 # copy static files
 /opt/netbox/netbox/manage.py collectstatic --no-input
