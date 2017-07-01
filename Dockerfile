@@ -13,6 +13,7 @@ RUN apk add --no-cache \
       openldap-dev \
       openssl-dev \
       postgresql-dev \
+      postgresql-client \
       wget \
   && pip install gunicorn==17.5 django-auth-ldap
 
