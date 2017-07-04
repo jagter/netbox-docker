@@ -24,7 +24,7 @@ END
 /opt/netbox/netbox/manage.py collectstatic --no-input
 
 # add token for unittests
-if ! [ "$(PGPASSWORD=${DB_PASSWORD} psql -U netbox -d netbox -tAc "select 1 from users_token where id=1")" = '1' ];
+if ! [ "$(PGPASSWORD=${DB_PASSWORD} psql -h postgres -U netbox -d netbox -tAc "select 1 from users_token where id=1")" = '1' ];
 then
   PGPASSWORD=${DB_PASSWORD} psql -h postgres -U netbox -d netbox -c "INSERT INTO users_token VALUES (1, '2017-07-01 08:23:03.33113+00', DEFAULT, '${SUPERUSER_TOKEN}', True, ' ', 1)"
 fi
